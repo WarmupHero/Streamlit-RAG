@@ -13,6 +13,20 @@ import ast
 import zipfile
 import os
 
+@st.cache_resource
+def load_embedding_model():
+    return SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+
+@st.cache_data
+def load_embeddings():
+    return np.load("word_embeddings.npy")
+
+@st.cache_data
+def load_corpus_df():
+    with open("my_corpus.json", "r", encoding="utf-8") as f:
+        structured_corpus = json.load(f)
+    return pd.DataFrame(structured_corpus)
+
 if not os.path.exists("word_embeddings.npy") and os.path.exists("word_embeddings.zip"):
     with zipfile.ZipFile("word_embeddings.zip", 'r') as zip_ref:
         zip_ref.extractall()
@@ -223,14 +237,13 @@ def handle_metadata_query(prompt, df):
             return f"Displayed bar chart for column: `{column}`."
 
     return "Unrecognized task. Try asking for 'count', 'plot', or 'most_common'."
-
+    
 # Load corpus if not already in session state
 if "my_rag_text" not in st.session_state:
-    with open("my_corpus.json", "r", encoding="utf-8") as f:
-        structured_corpus = json.load(f)
-        st.session_state["structured_corpus_df"] = pd.DataFrame(structured_corpus)
+    df = load_corpus_df()
+    st.session_state["structured_corpus_df"] = df
 
-    df = st.session_state["structured_corpus_df"]
+    structured_corpus = df.to_dict(orient="records")
     my_corpus_chunks = [
         f"Job Authenticity: {entry.get('Job Authenticity', '')}\n\n"
         f"Title: {entry.get('Title', '')}\n\n"
@@ -249,10 +262,10 @@ if "my_rag_text" not in st.session_state:
     my_initial_rag_text = "\n\n===JOB_ENTRY===\n\n".join(my_corpus_chunks)
     st.session_state["my_rag_text"] = my_initial_rag_text
 
+
 # Load embeddings if not already in session state
 if "word_embeddings" not in st.session_state:
-    word_embeddings = np.load("word_embeddings.npy")
-    st.session_state["word_embeddings"] = word_embeddings
+    st.session_state["word_embeddings"] = load_embeddings()
 
 # Check if the LLM model is not already in the session state
 if "my_llm_model" not in st.session_state:
@@ -312,7 +325,7 @@ def create_sentences_rag():
             st.session_state['my_sentences_rag'] = st.session_state['my_sentences']
             st.session_state['my_sentences_rag_ids'] = [[i] for i in range(len(st.session_state['my_sentences']))]
 
-            if len(word_embeddings) != len(st.session_state['my_sentences_rag']):
+            if len(st.session_state["word_embeddings"]) != len(st.session_state['my_sentences_rag']):
                 st.error(f"Mismatch: {len(st.session_state['my_sentences_rag'])} chunks vs {len(word_embeddings)} embeddings. Please fix this.")
                 st.stop()
             st.session_state['my_embeddings'] = word_embeddings

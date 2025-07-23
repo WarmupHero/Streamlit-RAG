@@ -198,7 +198,7 @@ def handle_metadata_query(prompt, df):
         if col not in df_filtered.columns:
             return f"Invalid filter column: `{col}`. Available columns: {list(df_filtered.columns)}"
         df_filtered = df_filtered[df_filtered[col].notna()]
-        df_filtered = df_filtered[df_filtered[col].str.lower() == str(val).lower()]
+        df_filtered = df_filtered[df_filtered[col].str.lower().str.contains(str(val).lower())]
 
     # --- Handle each task ---
     if task == "count":

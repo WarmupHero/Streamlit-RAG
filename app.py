@@ -232,7 +232,7 @@ def handle_metadata_query(prompt, df):
                 ax.text(i, v + 1, str(v), ha='center', va='bottom', fontsize=8)
             # st.write("Filters applied:", filters)
             # st.write("Filtered dataset shape:", df_filtered.shape)
-            st.write("Filtered value counts:", df_filtered["Job Authenticity"].value_counts())
+            # st.write("Filtered value counts:", df_filtered["Job Authenticity"].value_counts())
             st.pyplot(fig)
             return f"Displayed bar chart for column: `{column}`."
 

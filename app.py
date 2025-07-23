@@ -300,8 +300,7 @@ if "client" not in st.session_state:
 
 # Check if the embeddings model is not already in the session state
 if "embeddings_model" not in st.session_state:
-    # We will use the all-MiniLM-L6-v2 model for embeddings
-    st.session_state['embeddings_model'] = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+    st.session_state['embeddings_model'] = load_embedding_model()
 
 if "my_system_instructions" not in st.session_state:
     st.session_state["my_system_instructions"] = ("You are a helpful assistant that can answer questions only about the job postings in the corpus. Be brief and concise. "

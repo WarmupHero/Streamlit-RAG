@@ -325,7 +325,7 @@ def create_sentences_rag():
             st.session_state['my_sentences_rag_ids'] = [[i] for i in range(len(st.session_state['my_sentences']))]
 
             if len(st.session_state["word_embeddings"]) != len(st.session_state['my_sentences_rag']):
-                st.error(f"Mismatch: {len(st.session_state['my_sentences_rag'])} chunks vs {len(word_embeddings)} embeddings. Please fix this.")
+                st.error(f"Mismatch: {len(st.session_state['my_sentences_rag'])} chunks vs {len(st.session_state['word_embeddings'])} embeddings. Please fix this.")
                 st.stop()
             st.session_state['my_embeddings'] = word_embeddings
         st.success(f"{len(st.session_state['my_sentences_rag'])} chunks loaded successfully.")

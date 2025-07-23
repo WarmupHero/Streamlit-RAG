@@ -347,7 +347,9 @@ with column_1:
 
         This application and code (hereafter referred to as the “Software”) is a proof of concept and is intended solely for research, experimentation, and educational purposes. It is not designed or approved for use in production environments or for making hiring decisions, job classifications, or any form of automated screening.
 
-        The dataset used within the Software is derived from publicly available data on Kaggle with CC0: Public Domain copyright license, which contains both real and synthetic (fake) job postings. As such, the content and structure of the data may include inaccuracies, inconsistencies, or fabricated information that does not reflect real-world job listings. The Software does not verify or validate the authenticity of the data.
+        The dataset used within the Software is derived from publicly available data on Kaggle with CC0: Public Domain copyright license (https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction/data), which contains both real and synthetic (fake) job postings. As such, the content and structure of the data may include inaccuracies, inconsistencies, or fabricated information that does not reflect real-world job listings. 
+        
+        The Software does not verify or validate the authenticity of the data.
 
         The Software is provided “as is,” without any warranties of any kind, expressed or implied. The user assumes full responsibility for how the Software and underlying data are used, interpreted, or implemented.
 

@@ -405,7 +405,7 @@ with column_1:
          - What is this dataset about?
          - What are the most common red flags in fake job descriptions?
          - Describe the benefits offered in marketing jobs.
-         - What kind of language is used in fake job ads?
+         - Are there any postings for teachers?
          """)
 
     # Add a selectbox for model selection

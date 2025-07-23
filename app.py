@@ -410,8 +410,8 @@ with column_1:
 
     # Add a selectbox for model selection
     model_list_all = [  'mistralai/Mistral-7B-Instruct-v0.3',
-                        'Qwen/Qwen2.5-72B-Instruct', 
-                        'HuggingFaceH4/zephyr-7b-beta']
+                        'Qwen/Qwen2.5-72B-Instruct'] 
+                        #'HuggingFaceH4/zephyr-7b-beta']
     if os.getenv("GOOGLE_API_KEY"):
         model_list_all.append('gemini-2.5-flash-preview-05-20')
     if os.getenv("OPENAI_API_KEY"):

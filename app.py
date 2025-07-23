@@ -230,7 +230,7 @@ def handle_metadata_query(prompt, df):
             ax.set_xticklabels(top_counts.index, rotation=45, ha="right")
             for i, v in enumerate(top_counts.values):
                 ax.text(i, v + 1, str(v), ha='center', va='bottom', fontsize=8)
-            st.write("Filters applied:", filters)
+            # st.write("Filters applied:", filters)
             # st.write("Filtered dataset shape:", df_filtered.shape)
             st.write("Filtered value counts:", df_filtered["Job Authenticity"].value_counts())
             st.pyplot(fig)

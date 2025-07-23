@@ -10,6 +10,16 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import ast
+import zipfile
+import os
+
+if not os.path.exists("word_embeddings.npy") and os.path.exists("word_embeddings.zip"):
+    with zipfile.ZipFile("word_embeddings.zip", 'r') as zip_ref:
+        zip_ref.extractall()
+
+if not os.path.exists("my_corpus.json") and os.path.exists("my_corpus.zip"):
+    with zipfile.ZipFile("my_corpus.zip", 'r') as zip_ref:
+        zip_ref.extractall()
 
 st.set_page_config(layout="wide")
 
